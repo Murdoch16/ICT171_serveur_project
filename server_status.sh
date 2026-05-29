@@ -1,50 +1,29 @@
 #!/usr/bin/env bash
-#
-# server_status.sh
-# -----------------------------------------------------------------------------
-# Purpose:
-#   Collects key health metrics from this Ubuntu / DigitalOcean server and
-#   generates a styled HTML status page that is served by nginx. The output is
-#   therefore publicly verifiable online at:
-#       https://substanceinfo.xyz/status.html
-#   This lets anyone (e.g. a marker) confirm the script's output without
-#   needing SSH access to the server.
-#
-# Author : Student 35984197 (ICT171)
-# Usage  : sudo ./server_status.sh
-# Cron   : */30 * * * * /root/server_status.sh   # refresh every 30 minutes
-# -----------------------------------------------------------------------------
 
-set -euo pipefail   # stop on errors, undefined vars, and broken pipes
 
-# --- Configuration -----------------------------------------------------------
-OUTPUT="/var/www/stayaware/status.html"          # where the page is written
-DOMAIN="substanceinfo.xyz"                        # used to read the SSL cert
-CERT="/etc/letsencrypt/live/${DOMAIN}/cert.pem"   # Let's Encrypt certificate
+set -euo pipefail   
 
-# --- Collect metrics ---------------------------------------------------------
-GENERATED="$(date '+%Y-%m-%d %H:%M:%S %Z')"       # when this report was made
-HOSTNAME_VAL="$(hostname)"                         # server hostname
-KERNEL="$(uname -r)"                               # kernel version
-UPTIME_VAL="$(uptime -p)"                          # human-readable uptime
+OUTPUT="/var/www/stayaware/status.html"          
+DOMAIN="substanceinfo.xyz"                        
+CERT="/etc/letsencrypt/live/${DOMAIN}/cert.pem"   
 
-# Disk usage of the root filesystem: used / total / percentage
+GENERATED="$(date '+%Y-%m-%d %H:%M:%S %Z')"       
+HOSTNAME_VAL="$(hostname)"                         
+KERNEL="$(uname -r)"                               
+UPTIME_VAL="$(uptime -p)"                          
+
 DISK="$(df -h --output=used,size,pcent / | tail -n 1 | tr -s ' ')"
 
-# Memory: used / total
 MEM="$(free -h | awk '/^Mem:/ {print $3 " / " $2}')"
 
-# Is the nginx service running? (active / inactive / failed)
 NGINX_STATUS="$(systemctl is-active nginx || true)"
 
-# SSL certificate expiry date, read straight from the certificate file
 if [[ -r "$CERT" ]]; then
   SSL_EXPIRY="$(openssl x509 -enddate -noout -in "$CERT" | cut -d= -f2)"
 else
   SSL_EXPIRY="certificate not readable (run the script with sudo)"
 fi
 
-# --- Generate the HTML page --------------------------------------------------
 cat > "$OUTPUT" <<HTML
 <!DOCTYPE html>
 <html lang="en">
@@ -85,6 +64,5 @@ cat > "$OUTPUT" <<HTML
 </html>
 HTML
 
-# --- Confirmation to the operator -------------------------------------------
 echo "Status page written to ${OUTPUT}"
 echo "View it online at: https://${DOMAIN}/status.html"
