@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Server Status — SubstanceInfo</title>
+  <link rel="stylesheet" href="style.css">
+  <style>
+    .status-wrap { max-width: 760px; margin: 60px auto; padding: 0 20px; }
+    .status-card { border: 1px solid #ddd; border-radius: 12px; padding: 28px; }
+    .status-row  { display: flex; justify-content: space-between;
+                   padding: 12px 0; border-bottom: 1px solid #eee; }
+    .status-row:last-child { border-bottom: none; }
+    .ok    { color: #1a7f37; font-weight: 600; }
+    .label { color: #555; }
+  </style>
+</head>
+<body>
+  <div class="status-wrap">
+    <h1>Server Status</h1>
+    <p class="label">
+      Live health report for substanceinfo.xyz, generated automatically by
+      <code>server_status.sh</code>.
+    </p>
+    <div class="status-card">
+      <div class="status-row"><span class="label">Generated</span><span>2026-05-29 14:11:57 UTC</span></div>
+      <div class="status-row"><span class="label">Hostname</span><span>mrx</span></div>
+      <div class="status-row"><span class="label">Kernel</span><span>6.8.0-110-generic</span></div>
+      <div class="status-row"><span class="label">Uptime</span><span>up 5 weeks, 1 day, 10 hours, 50 minutes</span></div>
+      <div class="status-row"><span class="label">Disk (used / total / %)</span><span> 4.5G 24G 20%</span></div>
+      <div class="status-row"><span class="label">Memory (used / total)</span><span>352Mi / 961Mi</span></div>
+      <div class="status-row"><span class="label">Web server (nginx)</span><span class="ok">active</span></div>
+      <div class="status-row"><span class="label">SSL certificate expires</span><span>Jul 22 02:57:33 2026 GMT</span></div>
+    </div>
+  </div>
+</body>
+</html>

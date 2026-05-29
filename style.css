@@ -1,0 +1,269 @@
+/* ============================================================
+   Stay Aware — Substance Prevention
+   Shared stylesheet. Dark theme. No animations anywhere.
+   ============================================================ */
+
+:root {
+  --bg:        #0c0d10;   /* page background (near black) */
+  --surface:   #15171c;   /* cards / boxes */
+  --surface-2: #1d2027;   /* hover / nested boxes */
+  --border:    #2a2e37;   /* subtle borders */
+  --text:      #e7e8ec;   /* main text */
+  --muted:     #9aa0ab;   /* secondary text */
+  --accent:    #5fb8a0;   /* single calm accent (teal-green) */
+  --accent-dim:#244039;   /* accent background tint */
+  --danger:    #e0995f;   /* warnings / emergency */
+  --maxw:      940px;
+}
+
+* { box-sizing: border-box; }
+
+html { -webkit-text-size-adjust: 100%; }
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+  font-family: "Albert Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  font-size: 17px;
+  line-height: 1.65;
+}
+
+h1, h2, h3, nav, .brand {
+  font-family: "Sora", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+}
+
+a { color: var(--accent); }
+
+/* ---------- Layout ---------- */
+.container {
+  width: 100%;
+  max-width: var(--maxw);
+  margin: 0 auto;
+  padding: 0 22px;
+}
+
+/* ---------- Navigation bar ---------- */
+.nav {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  background: #0c0d10;
+  border-bottom: 1px solid var(--border);
+}
+.nav-inner {
+  max-width: var(--maxw);
+  margin: 0 auto;
+  padding: 14px 22px;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px 22px;
+}
+.brand {
+  font-weight: 700;
+  font-size: 1.05rem;
+  letter-spacing: 0.2px;
+  color: var(--text);
+  text-decoration: none;
+  margin-right: auto;
+}
+.brand span { color: var(--accent); }
+.nav a.link {
+  color: var(--muted);
+  text-decoration: none;
+  font-size: 0.95rem;
+  padding: 4px 2px;
+  border-bottom: 2px solid transparent;
+}
+.nav a.link:hover { color: var(--text); }
+.nav a.link.active {
+  color: var(--text);
+  border-bottom-color: var(--accent);
+}
+
+/* ---------- Hero / presentation ---------- */
+.hero {
+  padding: 78px 0 64px;
+  border-bottom: 1px solid var(--border);
+}
+.hero .eyebrow {
+  color: var(--accent);
+  font-size: 0.82rem;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  margin: 0 0 14px;
+}
+.hero h1 {
+  font-size: clamp(2rem, 5vw, 3rem);
+  line-height: 1.12;
+  margin: 0 0 22px;
+  font-weight: 700;
+}
+.hero p {
+  color: var(--muted);
+  font-size: 1.12rem;
+  max-width: 640px;
+  margin: 0 0 16px;
+}
+
+/* ---------- Section heading ---------- */
+.section {
+  padding: 64px 0;
+}
+.section-title {
+  font-size: 1.6rem;
+  margin: 0 0 8px;
+}
+.section-sub {
+  color: var(--muted);
+  margin: 0 0 38px;
+  max-width: 620px;
+}
+
+/* ---------- Substance cards (the 4 squares) ---------- */
+.grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 22px;
+}
+.card {
+  display: block;
+  text-decoration: none;
+  color: var(--text);
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 18px;
+  padding: 18px;
+}
+.card:hover {
+  background: var(--surface-2);
+  border-color: var(--accent);
+}
+.card .thumb {
+  /* Placeholder for the image you will add yourself.
+     Replace the inner text with: <img src="images/your-file.jpg" alt="..."> */
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  border-radius: 12px;
+  background: #0f1116;
+  border: 1px dashed var(--border);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--muted);
+  font-size: 0.85rem;
+  letter-spacing: 0.5px;
+  overflow: hidden;
+}
+.card .thumb img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+.card .label {
+  margin: 16px 4px 4px;
+  font-family: "Sora", sans-serif;
+  font-size: 1.15rem;
+  font-weight: 600;
+  text-align: center;
+}
+
+/* ---------- Substance article pages ---------- */
+.page-head {
+  padding: 56px 0 22px;
+  border-bottom: 1px solid var(--border);
+}
+.page-head .eyebrow {
+  color: var(--accent);
+  font-size: 0.8rem;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  margin: 0 0 10px;
+}
+.page-head h1 {
+  font-size: clamp(1.9rem, 4.5vw, 2.6rem);
+  margin: 0;
+}
+
+.article { padding: 40px 0 16px; }
+.article h2 {
+  font-size: 1.3rem;
+  margin: 36px 0 10px;
+}
+.article h2:first-child { margin-top: 0; }
+.article p { color: #cfd2d9; margin: 0 0 14px; }
+.article ul { color: #cfd2d9; margin: 0 0 14px; padding-left: 22px; }
+.article li { margin: 0 0 7px; }
+
+/* Callout / emergency box */
+.callout {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-left: 3px solid var(--danger);
+  border-radius: 10px;
+  padding: 16px 18px;
+  margin: 26px 0;
+  color: #e8d9cc;
+}
+.callout strong { color: var(--danger); }
+
+/* Help resources box */
+.help {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  padding: 24px 22px;
+  margin: 30px 0 10px;
+}
+.help h2 { margin: 0 0 6px; font-size: 1.25rem; }
+.help p.note { color: var(--muted); margin: 0 0 18px; font-size: 0.95rem; }
+.resource {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 4px 16px;
+  padding: 13px 0;
+  border-top: 1px solid var(--border);
+}
+.resource:first-of-type { border-top: none; }
+.resource .name { font-weight: 600; }
+.resource .desc { color: var(--muted); font-size: 0.92rem; flex: 1 1 240px; }
+.resource .phone {
+  font-family: "Sora", sans-serif;
+  color: var(--accent);
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.back {
+  display: inline-block;
+  margin: 8px 0 0;
+  color: var(--muted);
+  text-decoration: none;
+  font-size: 0.95rem;
+}
+.back:hover { color: var(--text); }
+
+/* ---------- Footer ---------- */
+.footer {
+  border-top: 1px solid var(--border);
+  padding: 32px 0 48px;
+  margin-top: 40px;
+}
+.footer p {
+  color: var(--muted);
+  font-size: 0.88rem;
+  margin: 0 0 6px;
+  max-width: 680px;
+}
+
+/* ---------- Responsive ---------- */
+@media (max-width: 640px) {
+  body { font-size: 16px; }
+  .grid { grid-template-columns: 1fr; }
+  .hero { padding: 54px 0 44px; }
+  .nav-inner { gap: 6px 16px; }
+}
